@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Study</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <audio id="bgMusic" autoplay loop muted>
+    <source src="kkk.mp3" type="audio/mpeg">
+</audio>
+<header class="header">
+    <a href="index.html" class="logo">StudyPlay PH</a>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Member</a>
+        <a href="redeem.html">Redeem</a>
+    </nav>
+</header>
+
+<section class="home">
+    <div class="home-content">
+        <h1>Choose Grade Level</h1>
+        <div class="subject-grid">
+            <a href="quiz_math.html" class="subject-btn1">1</a>
+            <a href="#" class="subject-btn2">2</a>
+            <a href="#" class="subject-btn3">3</a>
+            <a href="#" class="subject-btn4">4</a>
+            <a href="#" class="subject-btn5-6">5 & 6</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>
+<style>
+.subject-btn1{ display:flex; justify-content:center; align-items:center; width:150px; height:150px; border:3px solid #ffffff; color:white; font-size:20px; font-weight:700; text-decoration:none; border-radius:12px; transition:.3s; text-align:center;}
+.subject-btn1:hover{ background-color:#0320dc; color:#000; transform:scale(1.05);}
+.subject-btn2{ display:flex; justify-content:center; align-items:center; width:150px; height:150px; border:3px solid #ffffff; color:white; font-size:20px; font-weight:700; text-decoration:none; border-radius:12px; transition:.3s; text-align:center;}
+.subject-btn2:hover{ background-color:#008f1d; color:#000; transform:scale(1.05);}
+.subject-btn3{ display:flex; justify-content:center; align-items:center; width:150px; height:150px; border:3px solid #ffffff; color:white; font-size:20px; font-weight:700; text-decoration:none; border-radius:12px; transition:.3s; text-align:center;}
+.subject-btn3:hover{ background-color:#eedd49; color:#000; transform:scale(1.05);}
+.subject-btn4{ display:flex; justify-content:center; align-items:center; width:150px; height:150px; border:3px solid #ffffff; color:white; font-size:20px; font-weight:700; text-decoration:none; border-radius:12px; transition:.3s; text-align:center;}
+.subject-btn4:hover{ background-color:#c0181b; color:#000; transform:scale(1.05);}
+.subject-btn5-6{ display:flex; justify-content:center; align-items:center; width:150px; height:150px; border:3px solid #ffffff; color:white; font-size:20px; font-weight:700; text-decoration:none; border-radius:12px; transition:.3s; text-align:center;}
+.subject-btn5-6:hover{ background-color:#b7109e; color:#000; transform:scale(1.05);}
+</style>
+<script>
+    const music = document.getElementById("bgMusic");
+music.volume = 0.3; // 30% volume
+window.addEventListener("load", () => {
+    const music = document.getElementById("bgMusic");
+    music.play().catch(() => {
+        console.log("Autoplay blocked by browser.");
+    });
+
+    // Optional: try to unmute after 1 second (some browsers may allow this)
+    setTimeout(() => {
+        music.muted = false;
+    }, 10);
+});
+</script>

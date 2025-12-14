@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redeem</title>
+<link rel="stylesheet" href="redeem.css">
+<script>
+function loadPoints(){
+    let pts = parseInt(localStorage.getItem('studyPoints')) || 0;
+    document.getElementById('points').innerText = pts;
+}
+
+function redeem(amount, reward){
+    let pts = parseInt(localStorage.getItem('studyPoints')) || 0;
+    if(pts>=amount){
+        let acc = prompt(`Enter your ${reward} account ID:`);
+        if(acc){
+            pts -= amount;
+            localStorage.setItem('studyPoints', pts);
+            alert(`Redeemed ${reward} successfully!\nRemaining Points: ${pts}`);
+            loadPoints();
+        }
+    } else {
+        alert('Not enough points!');
+    }
+}
+window.onload = loadPoints;
+</script>
+</head>
+<body>
+<header class="header">
+    <a href="index.html" class="logo">StudyPlay PH</a>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Member</a>
+        <a href="#" class="active">Redeem</a>
+    </nav>
+</header>
+
+<section class="redeem-section">
+    <div class="home-content2">
+    <h2>Your Points: <span id="points"></span></h2>
+    <button onclick="redeem(100,'Roblox 1 Coin')">Redeem 100 pts → 1 Roblox Coin</button>
+    <button onclick="redeem(1000,'Roblox 30 Coins')">Redeem 1000 pts → 30 Roblox Coins</button>
+    <button onclick="redeem(10000,'Roblox 100 Coins')">Redeem 10000 pts → 100 Roblox Coins</button>
+    </div>
+</section>
+
+</body>
+</html>

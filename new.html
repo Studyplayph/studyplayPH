@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Study</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <audio id="bgMusic" autoplay loop muted>
+    <source src="bg-music (2).mp3" type="audio/mpeg">
+</audio>
+<header class="header">
+    <a href="index.html" class="logo">StudyPlay PH</a>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Member</a>
+        <a href="redeem.html">Redeem</a>
+    </nav>
+</header>
+
+<section class="home">
+    <div class="home-content">
+        <h1>Choose Subject</h1>
+        <div class="subject-grid">
+            <a href="mathgrade.html" class="subject-btna">Math</a>
+            <a href="quiz_shapes.html" class="subject-btnb">Shapes</a>
+            <a href="#" class="subject-btnc">Science</a>
+            <a href="#" class="subject-btnd">Filipino</a>
+            <a href="#" class="subject-btne">English</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>
+<script>
+    const music = document.getElementById("bgMusic");
+music.volume = 0.5; // 30% volume
+window.addEventListener("load", () => {
+    const music = document.getElementById("bgMusic");
+    music.play().catch(() => {
+        console.log("Autoplay blocked by browser.");
+    });
+
+
+    // Optional: try to unmute after 1 second (some browsers may allow this)
+    setTimeout(() => {
+        music.muted = false;
+    }, 10);
+});
+</script>

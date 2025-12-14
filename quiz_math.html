@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Quiz</title>
+<link rel="stylesheet" href="quiz.css">
+<!-- YouTube API -->
+<script src="https://www.youtube.com/iframe_api"></script>
+</head>
+
+<body>
+    <audio id="bgMusic" autoplay loop muted>
+        <source src="bg-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <header class="header">
+        <a href="index.html" class="logo">StudyPlay PH</a>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="redeem.html">Redeem</a>
+        </nav>
+    </header>
+
+    <section class="home">
+        <div class="home-content">
+            <h1>Math</h1>
+
+            <div id="video-section">
+                <iframe id="ytVideo" width="560" height="315"
+                    src="https://www.youtube.com/embed/mjlsSYLLOSE?enablejsapi=1"
+                    frameborder="0" allowfullscreen>
+                </iframe>
+                <button id="video-btn" onclick="finishVideo()">Done Watching</button>
+            </div>
+
+            <div id="quiz-section" style="display:none;">
+                <h2>Quiz</h2>
+                <div class="question active">
+                    <h2 id="question"></h2>
+                    <div id="answers"></div>
+                    <div class="quiz-footer">
+                        <span id="progress">1 of 5 Questions</span>
+                        <button id="nextBtn" style="display:none;">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="quiz-math.js"></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shapes Quiz</title>
+<link rel="stylesheet" href="quiz.css">
+<script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+
+<!-- Background music -->
+<audio id="bgMusic" autoplay loop muted>
+    <source src="k.mp3" type="audio/mpeg">
+</audio>
+
+<header class="header">
+    <a href="index.html" class="logo">StudyPlay PH</a>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Member</a>
+        <a href="redeem.html">Redeem</a>
+    </nav>
+</header>
+
+<section class="home">
+    <div class="home-content">
+        <h1>Shapes Quiz</h1>
+
+        <!-- Video Section -->
+        <div id="video-section1">
+            <iframe id="ytVideo1" width="560" height="315"
+                src="https://www.youtube.com/embed/1nJ5VbyD6tY?enablejsapi=1"
+                frameborder="0" allowfullscreen></iframe>
+            <button id="video-btn">Done Watching</button>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quiz-section" style="display:none;">
+            <h2>Quiz</h2>
+            <div class="question active">
+                <h2 id="question"></h2>
+                <div id="answers"></div>
+                <div id="feedback" style="margin-top:10px;font-weight:bold"></div>
+                <div class="quiz-footer">
+                    <span id="progress">1 of 5 Questions</span>
+                    <button id="nextBtn" style="display:none;">Next</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+// -------------------- POINTS --------------------
+let points = parseInt(localStorage.getItem("studyPoints")) || 0;
+let index = 0;
+let locked = false;
+
+// -------------------- SHAPES QUESTIONS --------------------
+const quiz = [
+    { q: "Which shape is round?", a: ["Square","Circle","Triangle","Rectangle"], correct: 1 },
+    { q: "Which shape has 4 equal sides?", a: ["Rectangle","Triangle","Square","Circle"], correct: 2 },
+    { q: "Which shape has 3 sides?", a: ["Circle","Square","Triangle","Rectangle"], correct: 2 },
+    { q: "Which shape looks like a door?", a: ["Circle","Square","Rectangle","Triangle"], correct: 2 },
+    { q: "Which shape has no corners?", a: ["Circle","Square","Triangle","Rectangle"], correct: 0 }
+];
+
+// -------------------- MUSIC --------------------
+const music = document.getElementById("bgMusic");
+music.volume = 0.2; // lower volume
+
+// Autoplay muted music immediately
+music.play().catch(() => {
+    // If autoplay is blocked, it stays muted until user interaction
+});
+
+// -------------------- VIDEO --------------------
+const videoSection = document.getElementById("video-section1");
+const iframe = document.getElementById("ytVideo1");
+const doneBtn = document.getElementById("video-btn");
+
+// Mute music while video is visible
+function checkMuteMusic() {
+    if(videoSection.style.display !== "none") music.muted = true;
+}
+checkMuteMusic();
+
+// -------------------- DONE WATCHING --------------------
+doneBtn.addEventListener("click", () => {
+    points += 5;
+    localStorage.setItem("studyPoints", points);
+    alert("+5 Points for watching video! Total Points: " + points);
+
+    // Stop video
+    iframe.src = iframe.src;
+
+    // Hide video, show quiz
+    videoSection.style.display = "none";
+    document.getElementById("quiz-section").style.display = "block";
+
+    // Resume music
+    music.muted = false;
+    music.play();
+
+    // Load first question
+    loadQuestion();
+});
+
+// -------------------- LOAD QUESTION --------------------
+function loadQuestion() {
+    locked = false;
+    document.getElementById("nextBtn").style.display = "none";
+
+    const q = quiz[index];
+    document.getElementById("question").innerText = `${index + 1}. ${q.q}`;
+    document.getElementById("progress").innerText = `${index + 1} of ${quiz.length} Questions`;
+
+    const answers = document.getElementById("answers");
+    answers.innerHTML = "";
+
+    const feedback = document.getElementById("feedback");
+    feedback.innerText = "";
+
+    q.a.forEach((text,i) => {
+        const btn = document.createElement("div");
+        btn.className = "answer";
+        btn.innerText = text;
+        btn.onclick = () => selectAnswer(btn,i);
+        answers.appendChild(btn);
+    });
+}
+
+// -------------------- SELECT ANSWER --------------------
+function selectAnswer(btn,i) {
+    if(locked) return;
+    locked = true;
+
+    const correct = quiz[index].correct;
+    const buttons = document.querySelectorAll(".answer");
+    const feedback = document.getElementById("feedback");
+
+    buttons.forEach(b => b.onclick = null);
+
+    if(i === correct){
+        btn.classList.add("correct");
+        points += 2;
+        localStorage.setItem("studyPoints", points);
+        feedback.innerText = "Correct! +2 points";
+        feedback.style.color = "#00ff88";
+    } else {
+        btn.classList.add("wrong");
+        buttons[correct].classList.add("correct");
+        feedback.innerText = "Wrong!";
+        feedback.style.color = "#ff4d4d";
+    }
+
+    document.getElementById("nextBtn").style.display = "block";
+}
+
+// -------------------- NEXT BUTTON --------------------
+document.getElementById("nextBtn").onclick = () => {
+    index++;
+    if(index < quiz.length){
+        loadQuestion();
+    } else {
+        alert(`Quiz Finished! Total Points: ${points}`);
+        window.location.href = "redeem.html";
+    }
+};
+</script>
+
+</body>
+</html>
